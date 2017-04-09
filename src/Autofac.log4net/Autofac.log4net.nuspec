@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+	<metadata>
+		<id>Autofac.log4net</id>
+		<version>$version$</version>
+		<title>Autofac</title>
+		<authors>Eran Gil</authors>
+		<owners>Eran Gil</owners>
+		<projectUrl>https://github.com/erangil2/autofac.log4net</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Enables a logging module for Autofac IoC containers</description>
+		<copyright>Copyright 2017</copyright>
+		<dependencies>
+			<dependency id="Autofac" version="3.0.0" />
+			<dependency id="log4net" version="2.0.3" />
+		</dependencies> 
+	</metadata>
+</package>
