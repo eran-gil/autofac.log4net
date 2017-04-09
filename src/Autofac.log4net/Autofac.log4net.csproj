@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Log4NetModule.cs" />
+    <Compile Include="log4net\ILog4NetAdapter.cs" />
+    <Compile Include="log4net\Log4NetAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
