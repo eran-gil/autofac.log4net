@@ -18,7 +18,7 @@ namespace Autofac.log4net
 
         public bool ShouldWatchConfiguration { get; set; }
 
-        public Log4NetModule() : 
+        public Log4NetModule() :
             this(new Log4NetAdapter(), new Dictionary<string, string>())
         {
         }
@@ -39,6 +39,19 @@ namespace Autofac.log4net
         public void MapTypeToLoggerName(Type type, string loggerName)
         {
             _typesToLoggers[type.ToString()] = loggerName;
+        }
+
+        protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)
+        {
+            registration.Preparing += OnComponentPreparing;
+
+            registration.Activated += (sender, e) => InjectLoggerProperties(e.Instance);
+        }
+
+        protected override void Load(ContainerBuilder builder)
+        {
+            _log4NetAdapter.ConfigureAndWatch(ConfigFileName, ShouldWatchConfiguration);
+            base.Load(builder);
         }
 
         private void InjectLoggerProperties(object instance)
@@ -72,19 +85,6 @@ namespace Autofac.log4net
             var logger = _log4NetAdapter.GetLogger(loggerName);
             return logger;
 
-        }
-
-        protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)
-        {
-            registration.Preparing += OnComponentPreparing;
-
-            registration.Activated += (sender, e) => InjectLoggerProperties(e.Instance);
-        }
-
-        protected override void Load(ContainerBuilder builder)
-        {
-            _log4NetAdapter.ConfigureAndWatch(ConfigFileName, ShouldWatchConfiguration);
-            base.Load(builder);
         }
 
         private static IEnumerable<PropertyInfo> GetILogProperties(IReflect instanceType)
