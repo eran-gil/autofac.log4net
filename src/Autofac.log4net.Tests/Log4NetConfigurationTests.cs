@@ -17,7 +17,7 @@ namespace Autofac.log4net.Tests
         }
 
         [Test]
-        public void SHOULD_NOT_LOAD_CONFIGURATION_FILE()
+        public void SHOULD_LOAD_NULL_CONFIGURATION_FILE()
         {
             //Arrange
             var builder = new ContainerBuilder();

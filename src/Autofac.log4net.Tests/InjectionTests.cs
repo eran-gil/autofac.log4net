@@ -77,8 +77,8 @@ namespace Autofac.log4net.Tests
         }
 
         [Test]
-        [TestCase("Logger1", TestName = "Should inject property parameter with Logger1")]
-        [TestCase("Logger2", TestName = "Should inject property parameter with Logger2")]
+        [TestCase("Logger1", TestName = "Should inject property with Logger1")]
+        [TestCase("Logger2", TestName = "Should inject property with Logger2")]
         public void SHOULD_INJECT_PROPERTY_WITH_MAPPED_LOGGER(string loggerName)
         {
             //Arrange
@@ -98,8 +98,8 @@ namespace Autofac.log4net.Tests
         }
 
         [Test]
-        [TestCase("Logger1", TestName = "Should inject property parameter without Logger1")]
-        [TestCase("Logger2", TestName = "Should inject property parameter without Logger2")]
+        [TestCase("Logger1", TestName = "Should inject property without Logger1")]
+        [TestCase("Logger2", TestName = "Should inject property without Logger2")]
         public void SHOULD_INJECT_PROPERTY_WITHOUT_MAPPED_LOGGER(string loggerName)
         {
             //Arrange

@@ -22,11 +22,11 @@ namespace Autofac.log4net.log4net
             var configFileInfo = new FileInfo(fileName);
             if (shouldWatch)
             {
-                var collection = XmlConfigurator.ConfigureAndWatch(configFileInfo);
+                XmlConfigurator.ConfigureAndWatch(configFileInfo);
             }
             else
             {
-                var ctx = XmlConfigurator.Configure(configFileInfo);
+                XmlConfigurator.Configure(configFileInfo);
             }
         }
     }
