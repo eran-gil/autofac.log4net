@@ -14,10 +14,14 @@ namespace Autofac.log4net
         private readonly IDictionary<string, string> _typesToLoggers;
         private const BindingFlags RelevantProeprties = BindingFlags.Public | BindingFlags.Instance;
 
-
         public string ConfigFileName { get; set; }
 
         public bool ShouldWatchConfiguration { get; set; }
+
+        public Log4NetModule() : 
+            this(new Log4NetAdapter(), new Dictionary<string, string>())
+        {
+        }
 
         public Log4NetModule(ILog4NetAdapter log4NetAdapter) :
             this(log4NetAdapter, new Dictionary<string, string>())
