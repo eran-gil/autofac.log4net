@@ -19,8 +19,8 @@ namespace Autofac.log4net.Tests
         }
 
         [Test]
-        [TestCase("Logger1", TestName = "Logger Name 1")]
-        [TestCase("Logger2", TestName = "Logger Name 2")]
+        [TestCase("Logger1", TestName = "Should inject with Logger1")]
+        [TestCase("Logger2", TestName = "Should inject with Logger2")]
         public void SHOULD_INJECT_LOGGER_WITH_MAPPED_CLASS_NAME(string loggerName)
         {
             var injectableType = typeof(InjectableClass);
@@ -36,8 +36,8 @@ namespace Autofac.log4net.Tests
         }
 
         [Test]
-        [TestCase("Logger1", TestName = "Logger Name 1")]
-        [TestCase("Logger2", TestName = "Logger Name 2")]
+        [TestCase("Logger1", TestName = "Should inject without Logger1")]
+        [TestCase("Logger2", TestName = "Should inject without Logger2")]
         public void SHOULD_INJECT_LOGGER_WITHOUT_MAPPED_CLASS_NAME(string loggerName)
         {
             var builder = new ContainerBuilder();
