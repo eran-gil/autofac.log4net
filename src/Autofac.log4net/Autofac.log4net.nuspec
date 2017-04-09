@@ -8,7 +8,7 @@
 		<owners>Eran Gil</owners>
 		<projectUrl>https://github.com/erangil2/autofac.log4net</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-		<description>Enables a logging module for Autofac IoC containers</description>
+		<description>This package allows Autofac to integrate with the log4net logging framework. The main feature of the package is its Log4NetModule for Autofac.</description>
 		<copyright>Copyright 2017</copyright>
 		<dependencies>
 			<dependency id="Autofac" version="3.0.0" />
