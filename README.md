@@ -1,0 +1,1 @@
+autofac.log4net
