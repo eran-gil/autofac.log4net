@@ -28,9 +28,9 @@ namespace Autofac.log4net
             ShouldWatchConfiguration = true;
         }
 
-        public void MapTypeToLoggerName(string type, string loggerName)
+        public void MapTypeToLoggerName(Type type, string loggerName)
         {
-            _typesToLoggers[type] = loggerName;
+            _typesToLoggers[type.ToString()] = loggerName;
         }
 
         private void InjectLoggerProperties(object instance)
