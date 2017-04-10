@@ -4,7 +4,7 @@ using Autofac.log4net.Extensions;
 
 namespace Autofac.log4net.Mapping
 {
-    public class NamespaceLengthComparer : IComparer<string>
+    internal class NamespaceLengthComparer : IComparer<string>
     {
         public int Compare(string str1, string str2)
         {

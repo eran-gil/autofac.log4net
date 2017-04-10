@@ -4,7 +4,7 @@ using log4net.Config;
 
 namespace Autofac.log4net.log4net
 {
-    public class Log4NetAdapter : ILog4NetAdapter
+    internal class Log4NetAdapter : ILog4NetAdapter
     {
         public ILog GetLogger(string loggerName)
         {

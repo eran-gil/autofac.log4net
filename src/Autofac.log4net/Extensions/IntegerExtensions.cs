@@ -1,8 +1,8 @@
 ﻿namespace Autofac.log4net.Extensions
 {
-    public static class IntegerExtensions
+    internal static class IntegerExtensions
     {
-        public static int Opposite(this int num)
+        internal static int Opposite(this int num)
         {
             return num * -1;
         }
