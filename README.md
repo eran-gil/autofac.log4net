@@ -7,7 +7,7 @@ It contains a Log4NetModule to support injection of ILog properties and construc
 ![VisualStudioBuild](https://erangil.visualstudio.com/_apis/public/build/definitions/03a1fe3b-e4f9-4387-a1e8-6f577710315e/4/badge) [![NuGet version](https://badge.fury.io/nu/autofac.log4net.svg)](https://badge.fury.io/nu/autofac.log4net)
 
 ## Requirements
-- Supports .net 4 and above.
+- Supports .NET 4 and above.
 - The package has 2 package dependencies:
     - log4net >= 2.0.3
     - Autofac >= 3.0.0
