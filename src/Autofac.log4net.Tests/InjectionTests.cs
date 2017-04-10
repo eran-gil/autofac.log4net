@@ -11,13 +11,13 @@ namespace Autofac.log4net.Tests
     public class InjectionTests
     {
         private ILog4NetAdapter _log4NetAdapter;
-        private ITypeLoggerMapper _typeLoggerMapperAdapter;
+        private ILoggerMapper _loggerMapperAdapter;
 
         [SetUp]
         public void SetupTests()
         {
             _log4NetAdapter = Substitute.For<ILog4NetAdapter>();
-            _typeLoggerMapperAdapter = Substitute.For<ITypeLoggerMapper>();
+            _loggerMapperAdapter = Substitute.For<ILoggerMapper>();
         }
 
         [Test]
@@ -27,14 +27,14 @@ namespace Autofac.log4net.Tests
         {
             //Arrange
             var builder = new ContainerBuilder();
-            var loggingModule = new Log4NetModule(_log4NetAdapter, _typeLoggerMapperAdapter);
+            var loggingModule = new Log4NetModule(_log4NetAdapter, _loggerMapperAdapter);
             var fakeLogger = Substitute.For<ILog>();
             fakeLogger.Logger.Name.Returns(loggerName);
             _log4NetAdapter.GetLogger(loggerName).Returns(fakeLogger);
             builder.RegisterModule(loggingModule);
             builder.RegisterModule(loggingModule);
             builder.RegisterType<InjectableClass>();
-            _typeLoggerMapperAdapter.GetLoggerName(typeof(InjectableClass)).Returns(loggerName);
+            _loggerMapperAdapter.GetLoggerName(typeof(InjectableClass)).Returns(loggerName);
             var container = builder.Build();
 
             //Act
@@ -51,13 +51,13 @@ namespace Autofac.log4net.Tests
         {
             //Arrange
             var builder = new ContainerBuilder();
-            var loggingModule = new Log4NetModule(_log4NetAdapter, _typeLoggerMapperAdapter);
+            var loggingModule = new Log4NetModule(_log4NetAdapter, _loggerMapperAdapter);
             var fakeLogger = Substitute.For<ILog>();
             fakeLogger.Logger.Name.Returns(loggerName);
             _log4NetAdapter.GetLogger(loggerName).Returns(fakeLogger);
             builder.RegisterModule(loggingModule);
             builder.RegisterType<InjectableClass>();
-            _typeLoggerMapperAdapter.GetLoggerName(typeof(InjectableClass)).Returns(loggerName);
+            _loggerMapperAdapter.GetLoggerName(typeof(InjectableClass)).Returns(loggerName);
             var container = builder.Build();
 
             //Act

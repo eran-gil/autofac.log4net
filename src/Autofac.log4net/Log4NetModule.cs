@@ -12,7 +12,7 @@ namespace Autofac.log4net
     public class Log4NetModule : Module
     {
         private readonly ILog4NetAdapter _log4NetAdapter;
-        private readonly ITypeLoggerMapper _typeLoggerMapper;
+        private readonly ILoggerMapper _loggerMapper;
         private const BindingFlags RelevantProeprties = BindingFlags.Public | BindingFlags.Instance;
 
         public string ConfigFileName { get; set; }
@@ -20,21 +20,26 @@ namespace Autofac.log4net
         public bool ShouldWatchConfiguration { get; set; }
 
         public Log4NetModule() :
-            this(new Log4NetAdapter(), new DictionaryTypeLoggerMapper())
+            this(new Log4NetAdapter(), new DictionaryLoggerMapper())
         {
         }
 
-        public Log4NetModule(ILog4NetAdapter log4NetAdapter, ITypeLoggerMapper typeLoggerMapper)
+        public Log4NetModule(ILog4NetAdapter log4NetAdapter, ILoggerMapper loggerMapper)
         {
             _log4NetAdapter = log4NetAdapter;
-            _typeLoggerMapper = typeLoggerMapper;
+            _loggerMapper = loggerMapper;
             ConfigFileName = null;
             ShouldWatchConfiguration = true;
         }
 
         public void MapTypeToLoggerName(Type type, string loggerName)
         {
-            _typeLoggerMapper.MapTypeToLoggerName(type, loggerName);
+            _loggerMapper.MapTypeToLoggerName(type, loggerName);
+        }
+
+        public void MapNamespaceToLoggerName(string @namespace, string loggerName)
+        {
+            _loggerMapper.MapNamespaceToLoggerName(@namespace, loggerName);
         }
 
         protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)
@@ -76,10 +81,9 @@ namespace Autofac.log4net
 
         private ILog GetLoggerFromType(Type type)
         {
-            var loggerName = _typeLoggerMapper.GetLoggerName(type);
+            var loggerName = _loggerMapper.GetLoggerName(type);
             var logger = _log4NetAdapter.GetLogger(loggerName);
             return logger;
-
         }
 
         private static IEnumerable<PropertyInfo> GetILogProperties(IReflect instanceType)

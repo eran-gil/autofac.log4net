@@ -15,7 +15,7 @@ namespace Autofac.log4net.Tests
         public void SHOULD_RETURN_TYPE_STRING_AS_LOGGER_NAME()
         {
             //Arrange
-            var typeMapper = new DictionaryTypeLoggerMapper();
+            var typeMapper = new DictionaryLoggerMapper();
             var type = typeof(InjectableClass);
 
             //Act
@@ -31,7 +31,7 @@ namespace Autofac.log4net.Tests
         public void SHOULD_RETURN_LOGGER_NAME_FROM_MAPPING(string expectedLoggerName)
         {
             //Arrange
-            var typeMapper = new DictionaryTypeLoggerMapper();
+            var typeMapper = new DictionaryLoggerMapper();
             var type = typeof(InjectableClass);
             typeMapper.MapTypeToLoggerName(type, expectedLoggerName);
 
@@ -52,7 +52,8 @@ namespace Autofac.log4net.Tests
             {
                 {typeof(InjectableClass), expectedLoggerName }
             };
-            var typeMapper = new DictionaryTypeLoggerMapper(mappingDictionary);
+            var emptyDictionary = new Dictionary<string, string>();
+            var typeMapper = new DictionaryLoggerMapper(mappingDictionary, emptyDictionary);
             var type = typeof(InjectableClass);
 
             //Act
@@ -69,7 +70,7 @@ namespace Autofac.log4net.Tests
         {
             //Arrange
             var log4NetAdapter = Substitute.For<ILog4NetAdapter>();
-            var typeLoggerMapperAdapter = Substitute.For<ITypeLoggerMapper>();
+            var typeLoggerMapperAdapter = Substitute.For<ILoggerMapper>();
             var module = new Log4NetModule(log4NetAdapter, typeLoggerMapperAdapter);
             var type = typeof(InjectableClass);
 

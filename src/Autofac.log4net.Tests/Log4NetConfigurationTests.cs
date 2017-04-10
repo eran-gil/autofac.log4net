@@ -9,13 +9,13 @@ namespace Autofac.log4net.Tests
     public class Log4NetConfigurationTests
     {
         private ILog4NetAdapter _log4NetAdapter;
-        private ITypeLoggerMapper _typeLoggerMapperAdapter;
+        private ILoggerMapper _loggerMapperAdapter;
 
         [SetUp]
         public void SetupTests()
         {
             _log4NetAdapter = Substitute.For<ILog4NetAdapter>();
-            _typeLoggerMapperAdapter = Substitute.For<ITypeLoggerMapper>();
+            _loggerMapperAdapter = Substitute.For<ILoggerMapper>();
         }
 
         [Test]
@@ -23,7 +23,7 @@ namespace Autofac.log4net.Tests
         {
             //Arrange
             var builder = new ContainerBuilder();
-            var loggingModule = new Log4NetModule(_log4NetAdapter, _typeLoggerMapperAdapter);
+            var loggingModule = new Log4NetModule(_log4NetAdapter, _loggerMapperAdapter);
             builder.RegisterModule(loggingModule);
 
             //Act
@@ -44,7 +44,7 @@ namespace Autofac.log4net.Tests
             //Arrange
             var builder = new ContainerBuilder();
             var loggingModule =
-                new Log4NetModule(_log4NetAdapter, _typeLoggerMapperAdapter)
+                new Log4NetModule(_log4NetAdapter, _loggerMapperAdapter)
                 {
                     ConfigFileName = configFileName,
                     ShouldWatchConfiguration = shouldWatch
