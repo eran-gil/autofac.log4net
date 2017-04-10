@@ -1,4 +1,5 @@
 ﻿using Autofac.log4net.log4net;
+using Autofac.log4net.Mapping;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -8,12 +9,13 @@ namespace Autofac.log4net.Tests
     public class Log4NetConfigurationTests
     {
         private ILog4NetAdapter _log4NetAdapter;
+        private ITypeLoggerMapper _typeLoggerMapperAdapter;
 
         [SetUp]
         public void SetupTests()
         {
             _log4NetAdapter = Substitute.For<ILog4NetAdapter>();
-
+            _typeLoggerMapperAdapter = Substitute.For<ITypeLoggerMapper>();
         }
 
         [Test]
@@ -21,7 +23,7 @@ namespace Autofac.log4net.Tests
         {
             //Arrange
             var builder = new ContainerBuilder();
-            var loggingModule = new Log4NetModule(_log4NetAdapter);
+            var loggingModule = new Log4NetModule(_log4NetAdapter, _typeLoggerMapperAdapter);
             builder.RegisterModule(loggingModule);
 
             //Act
@@ -42,7 +44,7 @@ namespace Autofac.log4net.Tests
             //Arrange
             var builder = new ContainerBuilder();
             var loggingModule =
-                new Log4NetModule(_log4NetAdapter)
+                new Log4NetModule(_log4NetAdapter, _typeLoggerMapperAdapter)
                 {
                     ConfigFileName = configFileName,
                     ShouldWatchConfiguration = shouldWatch

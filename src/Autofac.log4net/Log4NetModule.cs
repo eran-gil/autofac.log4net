@@ -24,7 +24,6 @@ namespace Autofac.log4net
         {
         }
 
-
         public Log4NetModule(ILog4NetAdapter log4NetAdapter, ITypeLoggerMapper typeLoggerMapper)
         {
             _log4NetAdapter = log4NetAdapter;

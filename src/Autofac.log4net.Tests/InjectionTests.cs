@@ -1,5 +1,5 @@
 ﻿using Autofac.log4net.log4net;
-using FluentAssertions;
+using Autofac.log4net.Mapping;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -9,29 +9,13 @@ namespace Autofac.log4net.Tests
     public class InjectionTests
     {
         private ILog4NetAdapter _log4NetAdapter;
+        private ITypeLoggerMapper _typeLoggerMapperAdapter;
 
         [SetUp]
         public void SetupTests()
         {
             _log4NetAdapter = Substitute.For<ILog4NetAdapter>();
-        }
-
-        [Test]
-        public void SHOULD_INJECT_LOGGER_WITH_CLASS_NAME()
-        {
-            //Arrange
-            var injectableType = typeof(InjectableClass);
-            var builder = new ContainerBuilder();
-            var loggingModule = new Log4NetModule(_log4NetAdapter);
-            builder.RegisterModule(loggingModule);
-            builder.RegisterType<InjectableClass>();
-            var container = builder.Build();
-            
-            //Act
-            container.Resolve<InjectableClass>();
-
-            //Assert
-            _log4NetAdapter.Received().GetLogger(injectableType.ToString());
+            _typeLoggerMapperAdapter = Substitute.For<ITypeLoggerMapper>();
         }
 
         [Test]
@@ -40,13 +24,12 @@ namespace Autofac.log4net.Tests
         public void SHOULD_INJECT_CONSTRUCTOR_WITH_MAPPED_LOGGER(string loggerName)
         {
             //Arrange
-            var injectableType = typeof(InjectableClass);
             var builder = new ContainerBuilder();
-            var loggingModule = new Log4NetModule(_log4NetAdapter);
+            var loggingModule = new Log4NetModule(_log4NetAdapter, _typeLoggerMapperAdapter);
             builder.RegisterModule(loggingModule);
-            loggingModule.MapTypeToLoggerName(injectableType, loggerName);
             builder.RegisterModule(loggingModule);
             builder.RegisterType<InjectableClass>();
+            _typeLoggerMapperAdapter.GetLoggerName(typeof(InjectableClass)).Returns(loggerName);
             var container = builder.Build();
 
             //Act
@@ -54,26 +37,6 @@ namespace Autofac.log4net.Tests
 
             //Assert
             _log4NetAdapter.Received().GetLogger(loggerName);
-        }
-
-        [Test]
-        [TestCase("Logger1", TestName = "Should inject constructor parameter without Logger1")]
-        [TestCase("Logger2", TestName = "Should inject constructor parameter without Logger2")]
-        public void SHOULD_INJECT_CONSTRUCTOR_WITHOUT_MAPPED_LOGGER(string loggerName)
-        {
-            //Arrange
-            var builder = new ContainerBuilder();
-            var loggingModule = new Log4NetModule(_log4NetAdapter);
-            loggingModule.MapTypeToLoggerName(typeof(InjectionTests), loggerName);
-            builder.RegisterModule(loggingModule);
-            builder.RegisterType<InjectableClass>();
-            var container = builder.Build();
-
-            //Act
-            container.Resolve<InjectableClass>();
-
-            //Assert
-            _log4NetAdapter.DidNotReceive().GetLogger(loggerName);
         }
 
         [Test]
@@ -82,12 +45,11 @@ namespace Autofac.log4net.Tests
         public void SHOULD_INJECT_PROPERTY_WITH_MAPPED_LOGGER(string loggerName)
         {
             //Arrange
-            var injectableType = typeof(InjectableClass);
             var builder = new ContainerBuilder();
-            var loggingModule = new Log4NetModule(_log4NetAdapter);
-            loggingModule.MapTypeToLoggerName(injectableType, loggerName);
+            var loggingModule = new Log4NetModule(_log4NetAdapter, _typeLoggerMapperAdapter);
             builder.RegisterModule(loggingModule);
             builder.RegisterType<InjectableClass>();
+            _typeLoggerMapperAdapter.GetLoggerName(typeof(InjectableClass)).Returns(loggerName);
             var container = builder.Build();
 
             //Act
@@ -95,26 +57,6 @@ namespace Autofac.log4net.Tests
 
             //Assert
             _log4NetAdapter.Received().GetLogger(loggerName);
-        }
-
-        [Test]
-        [TestCase("Logger1", TestName = "Should inject property without Logger1")]
-        [TestCase("Logger2", TestName = "Should inject property without Logger2")]
-        public void SHOULD_INJECT_PROPERTY_WITHOUT_MAPPED_LOGGER(string loggerName)
-        {
-            //Arrange
-            var builder = new ContainerBuilder();
-            var loggingModule = new Log4NetModule(_log4NetAdapter);
-            loggingModule.MapTypeToLoggerName(typeof(InjectionTests), loggerName);
-            builder.RegisterModule(loggingModule);
-            builder.RegisterType<InjectableClass>();
-            var container = builder.Build();
-
-            //Act
-            container.Resolve<InjectableClass>();
-
-            //Assert
-            _log4NetAdapter.DidNotReceive().GetLogger(loggerName);
         }
     }
 }
