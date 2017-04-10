@@ -1,5 +1,7 @@
 ﻿using Autofac.log4net.log4net;
 using Autofac.log4net.Mapping;
+using FluentAssertions;
+using log4net;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -26,6 +28,9 @@ namespace Autofac.log4net.Tests
             //Arrange
             var builder = new ContainerBuilder();
             var loggingModule = new Log4NetModule(_log4NetAdapter, _typeLoggerMapperAdapter);
+            var fakeLogger = Substitute.For<ILog>();
+            fakeLogger.Logger.Name.Returns(loggerName);
+            _log4NetAdapter.GetLogger(loggerName).Returns(fakeLogger);
             builder.RegisterModule(loggingModule);
             builder.RegisterModule(loggingModule);
             builder.RegisterType<InjectableClass>();
@@ -33,10 +38,10 @@ namespace Autofac.log4net.Tests
             var container = builder.Build();
 
             //Act
-            container.Resolve<InjectableClass>();
+            var resolved = container.Resolve<InjectableClass>();
 
             //Assert
-            _log4NetAdapter.Received().GetLogger(loggerName);
+            resolved.InternalLogger.Logger.Name.Should().Be(loggerName);
         }
 
         [Test]
@@ -47,16 +52,19 @@ namespace Autofac.log4net.Tests
             //Arrange
             var builder = new ContainerBuilder();
             var loggingModule = new Log4NetModule(_log4NetAdapter, _typeLoggerMapperAdapter);
+            var fakeLogger = Substitute.For<ILog>();
+            fakeLogger.Logger.Name.Returns(loggerName);
+            _log4NetAdapter.GetLogger(loggerName).Returns(fakeLogger);
             builder.RegisterModule(loggingModule);
             builder.RegisterType<InjectableClass>();
             _typeLoggerMapperAdapter.GetLoggerName(typeof(InjectableClass)).Returns(loggerName);
             var container = builder.Build();
 
             //Act
-            container.Resolve<InjectableClass>();
+            var resolved = container.Resolve<InjectableClass>();
 
             //Assert
-            _log4NetAdapter.Received().GetLogger(loggerName);
+            resolved.PublicLogger.Logger.Name.Should().Be(loggerName);
         }
     }
 }

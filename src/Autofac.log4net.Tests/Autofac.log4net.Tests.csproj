@@ -65,6 +65,7 @@
     <Compile Include="InjectableClass.cs" />
     <Compile Include="Log4NetConfigurationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeLoggerMapperTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
