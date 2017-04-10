@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using Autofac.Core;
 using Autofac.log4net.log4net;
+using Autofac.log4net.Mapping;
 using log4net;
 
 namespace Autofac.log4net
@@ -11,7 +12,7 @@ namespace Autofac.log4net
     public class Log4NetModule : Module
     {
         private readonly ILog4NetAdapter _log4NetAdapter;
-        private readonly IDictionary<string, string> _typesToLoggers;
+        private readonly ITypeLoggerMapper _typeLoggerMapper;
         private const BindingFlags RelevantProeprties = BindingFlags.Public | BindingFlags.Instance;
 
         public string ConfigFileName { get; set; }
@@ -19,26 +20,22 @@ namespace Autofac.log4net
         public bool ShouldWatchConfiguration { get; set; }
 
         public Log4NetModule() :
-            this(new Log4NetAdapter(), new Dictionary<string, string>())
+            this(new Log4NetAdapter(), new DictionaryTypeLoggerMapper())
         {
         }
 
-        public Log4NetModule(ILog4NetAdapter log4NetAdapter) :
-            this(log4NetAdapter, new Dictionary<string, string>())
-        {
-        }
 
-        public Log4NetModule(ILog4NetAdapter log4NetAdapter, IDictionary<string, string> typesToLoggers)
+        public Log4NetModule(ILog4NetAdapter log4NetAdapter, ITypeLoggerMapper typeLoggerMapper)
         {
             _log4NetAdapter = log4NetAdapter;
-            _typesToLoggers = typesToLoggers;
+            _typeLoggerMapper = typeLoggerMapper;
             ConfigFileName = null;
             ShouldWatchConfiguration = true;
         }
 
         public void MapTypeToLoggerName(Type type, string loggerName)
         {
-            _typesToLoggers[type.ToString()] = loggerName;
+            _typeLoggerMapper.MapTypeToLoggerName(type, loggerName);
         }
 
         protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)
@@ -80,8 +77,7 @@ namespace Autofac.log4net
 
         private ILog GetLoggerFromType(Type type)
         {
-            var typeString = type.ToString();
-            var loggerName = _typesToLoggers.ContainsKey(typeString) ? _typesToLoggers[typeString] : typeString;
+            var loggerName = _typeLoggerMapper.GetLoggerName(type);
             var logger = _log4NetAdapter.GetLogger(loggerName);
             return logger;
 
