@@ -16,7 +16,7 @@ namespace Autofac.log4net.Tests
         public void SHOULD_RETURN_TYPE_STRING_AS_LOGGER_NAME()
         {
             //Arrange
-            var typeMapper = new DictionaryLoggerMapper();
+            var typeMapper = new CachedDictionaryLoggerMapper();
             var type = typeof(InjectableClass);
 
             //Act
@@ -32,7 +32,7 @@ namespace Autofac.log4net.Tests
         public void SHOULD_RETURN_LOGGER_NAME_FROM_TYPE_MAPPING(string expectedLoggerName)
         {
             //Arrange
-            var typeMapper = new DictionaryLoggerMapper();
+            var typeMapper = new CachedDictionaryLoggerMapper();
             var type = typeof(InjectableClass);
             typeMapper.MapTypeToLoggerName(type, expectedLoggerName);
 
@@ -49,7 +49,7 @@ namespace Autofac.log4net.Tests
         public void SHOULD_RETURN_LOGGER_NAME_FROM_NAMESPACE_MAPPING(string expectedLoggerName)
         {
             //Arrange
-            var typeMapper = new DictionaryLoggerMapper();
+            var typeMapper = new CachedDictionaryLoggerMapper();
             var type = typeof(InjectableClass);
             var @namespace = type.Namespace;
             typeMapper.MapNamespaceToLoggerName(@namespace, expectedLoggerName);
@@ -73,7 +73,7 @@ namespace Autofac.log4net.Tests
             };
             var emptyDictionary = new Dictionary<string, string>();
             var dummyCache = Substitute.For<IKeyValueCache<Type, string>>();
-            var typeMapper = new DictionaryLoggerMapper(mappingDictionary, emptyDictionary, dummyCache);
+            var typeMapper = new CachedDictionaryLoggerMapper(mappingDictionary, emptyDictionary, dummyCache);
             var type = typeof(InjectableClass);
 
             //Act
@@ -96,7 +96,7 @@ namespace Autofac.log4net.Tests
             };
             var emptyDictionary = new Dictionary<Type, string>();
             var dummyCache = Substitute.For<IKeyValueCache<Type, string>>();
-            var typeMapper = new DictionaryLoggerMapper(emptyDictionary, mappingDictionary, dummyCache);
+            var typeMapper = new CachedDictionaryLoggerMapper(emptyDictionary, mappingDictionary, dummyCache);
 
             //Act
             var loggerName = typeMapper.GetLoggerName(type);
@@ -119,7 +119,7 @@ namespace Autofac.log4net.Tests
             };
             var emptyDictionary = new Dictionary<Type, string>();
             var dummyCache = Substitute.For<IKeyValueCache<Type, string>>();
-            var typeMapper = new DictionaryLoggerMapper(emptyDictionary, mappingDictionary, dummyCache);
+            var typeMapper = new CachedDictionaryLoggerMapper(emptyDictionary, mappingDictionary, dummyCache);
 
             //Act
             var loggerName = typeMapper.GetLoggerName(type);
@@ -140,7 +140,7 @@ namespace Autofac.log4net.Tests
             };
             var emptyDictionary = new Dictionary<Type, string>();
             var dummyCache = Substitute.For<IKeyValueCache<Type, string>>();
-            var typeMapper = new DictionaryLoggerMapper(emptyDictionary, mappingDictionary, dummyCache);
+            var typeMapper = new CachedDictionaryLoggerMapper(emptyDictionary, mappingDictionary, dummyCache);
 
             //Act
             var loggerName = typeMapper.GetLoggerName(type);

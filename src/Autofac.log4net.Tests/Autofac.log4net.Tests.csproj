@@ -66,6 +66,7 @@
     <Compile Include="Log4NetConfigurationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeLoggerMapperTests.cs" />
+    <Compile Include="TypeMappingCacheTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

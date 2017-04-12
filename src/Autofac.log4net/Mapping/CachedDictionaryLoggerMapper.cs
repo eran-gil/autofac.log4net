@@ -52,9 +52,9 @@ namespace Autofac.log4net.Mapping
             if (matchingNamespaces.Any())
             {
                 var matchingNameSpace = matchingNamespaces.First();
-                loggerName =  _namespacesToLoggers[matchingNameSpace];
+                loggerName = _namespacesToLoggers[matchingNameSpace];
             }
-        _typesToLoggersCache.AddEntry(type, loggerName);
+            _typesToLoggersCache.AddEntry(type, loggerName);
             return loggerName;
         }
     }
