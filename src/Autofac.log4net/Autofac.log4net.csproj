@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Caching\DictionaryKeyValueCache.cs" />
+    <Compile Include="Caching\IKeyValueCache.cs" />
     <Compile Include="Extensions\IntegerExtensions.cs" />
     <Compile Include="Log4NetModule.cs" />
     <Compile Include="log4net\ILog4NetAdapter.cs" />
