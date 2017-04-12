@@ -20,7 +20,7 @@ namespace Autofac.log4net
         public bool ShouldWatchConfiguration { get; set; }
 
         public Log4NetModule() :
-            this(new Log4NetAdapter(), new DictionaryLoggerMapper())
+            this(new Log4NetAdapter(), new CachedDictionaryLoggerMapper())
         {
         }
 
