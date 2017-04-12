@@ -46,15 +46,16 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Caching\DictionaryKeyValueCache.cs" />
+    <Compile Include="Caching\IKeyValueCache.cs" />
     <Compile Include="Extensions\IntegerExtensions.cs" />
     <Compile Include="Log4NetModule.cs" />
     <Compile Include="log4net\ILog4NetAdapter.cs" />
     <Compile Include="log4net\Log4NetAdapter.cs" />
-    <Compile Include="Mapping\DictionaryLoggerMapper.cs" />
+    <Compile Include="Mapping\CachedDictionaryLoggerMapper.cs" />
     <Compile Include="Mapping\ILoggerMapper.cs" />
     <Compile Include="Mapping\NamespaceLengthComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
