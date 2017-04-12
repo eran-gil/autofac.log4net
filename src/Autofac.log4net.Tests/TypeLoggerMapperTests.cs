@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Autofac.log4net.Caching;
 using Autofac.log4net.log4net;
 using Autofac.log4net.Mapping;
 using FluentAssertions;
@@ -71,7 +72,8 @@ namespace Autofac.log4net.Tests
                 {typeof(InjectableClass), expectedLoggerName }
             };
             var emptyDictionary = new Dictionary<string, string>();
-            var typeMapper = new DictionaryLoggerMapper(mappingDictionary, emptyDictionary);
+            var dummyCache = Substitute.For<IKeyValueCache<Type, string>>();
+            var typeMapper = new DictionaryLoggerMapper(mappingDictionary, emptyDictionary, dummyCache);
             var type = typeof(InjectableClass);
 
             //Act
@@ -93,7 +95,8 @@ namespace Autofac.log4net.Tests
                 {type.Namespace, expectedLoggerName }
             };
             var emptyDictionary = new Dictionary<Type, string>();
-            var typeMapper = new DictionaryLoggerMapper(emptyDictionary, mappingDictionary);
+            var dummyCache = Substitute.For<IKeyValueCache<Type, string>>();
+            var typeMapper = new DictionaryLoggerMapper(emptyDictionary, mappingDictionary, dummyCache);
 
             //Act
             var loggerName = typeMapper.GetLoggerName(type);
@@ -115,7 +118,8 @@ namespace Autofac.log4net.Tests
                 {specificNameSpace, "SpecificLogger" },
             };
             var emptyDictionary = new Dictionary<Type, string>();
-            var typeMapper = new DictionaryLoggerMapper(emptyDictionary, mappingDictionary);
+            var dummyCache = Substitute.For<IKeyValueCache<Type, string>>();
+            var typeMapper = new DictionaryLoggerMapper(emptyDictionary, mappingDictionary, dummyCache);
 
             //Act
             var loggerName = typeMapper.GetLoggerName(type);
@@ -135,7 +139,8 @@ namespace Autofac.log4net.Tests
                 {generalNameSpace, "GeneralLogger" },
             };
             var emptyDictionary = new Dictionary<Type, string>();
-            var typeMapper = new DictionaryLoggerMapper(emptyDictionary, mappingDictionary);
+            var dummyCache = Substitute.For<IKeyValueCache<Type, string>>();
+            var typeMapper = new DictionaryLoggerMapper(emptyDictionary, mappingDictionary, dummyCache);
 
             //Act
             var loggerName = typeMapper.GetLoggerName(type);

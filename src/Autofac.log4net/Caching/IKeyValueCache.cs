@@ -10,6 +10,8 @@ namespace Autofac.log4net.Caching
 
         void AddEntry(TKey key, TValue value);
 
+        bool ContainsKey(TKey key);
+
         TValue GetEntryValue(TKey key);
     }
 }

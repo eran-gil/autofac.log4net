@@ -19,7 +19,7 @@ namespace Autofac.log4net.Caching
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable) _cacheDictionary).GetEnumerator();
+            return ((IEnumerable)_cacheDictionary).GetEnumerator();
         }
 
         public void Add(KeyValuePair<TKey, TValue> item)
@@ -72,13 +72,14 @@ namespace Autofac.log4net.Caching
             _cacheDictionary[key] = value;
         }
 
+        public bool ContainsKey(TKey key)
+        {
+            return _cacheDictionary.ContainsKey(key);
+        }
+
         public TValue GetEntryValue(TKey key)
         {
-            if (_cacheDictionary.ContainsKey(key))
-            {
-                return _cacheDictionary[key];
-            }
-            return default(TValue);
+            return _cacheDictionary[key];
         }
     }
 }
