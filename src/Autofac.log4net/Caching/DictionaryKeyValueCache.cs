@@ -57,16 +57,6 @@ namespace Autofac.log4net.Caching
             get { return _cacheDictionary.IsReadOnly; }
         }
 
-        public IEnumerable<TKey> Keys
-        {
-            get { return _cacheDictionary.Keys; }
-        }
-
-        public IEnumerable<TValue> Values
-        {
-            get { return _cacheDictionary.Values; }
-        }
-
         public void AddEntry(TKey key, TValue value)
         {
             _cacheDictionary[key] = value;
