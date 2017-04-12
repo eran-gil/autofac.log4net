@@ -55,7 +55,7 @@
     <Compile Include="Log4NetModule.cs" />
     <Compile Include="log4net\ILog4NetAdapter.cs" />
     <Compile Include="log4net\Log4NetAdapter.cs" />
-    <Compile Include="Mapping\DictionaryLoggerMapper.cs" />
+    <Compile Include="Mapping\CachedDictionaryLoggerMapper.cs" />
     <Compile Include="Mapping\ILoggerMapper.cs" />
     <Compile Include="Mapping\NamespaceLengthComparer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
