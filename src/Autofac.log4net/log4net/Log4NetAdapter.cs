@@ -1,6 +1,9 @@
 ﻿using System.IO;
+using System.Linq;
+using System.Reflection;
 using log4net;
 using log4net.Config;
+using log4net.Repository;
 
 namespace Autofac.log4net.log4net
 {
@@ -8,7 +11,7 @@ namespace Autofac.log4net.log4net
     {
         public ILog GetLogger(string loggerName)
         {
-            var logger = LogManager.GetLogger(loggerName);
+            var logger = LogManager.GetLogger(Assembly.GetCallingAssembly(), loggerName);
             return logger;
         }
 
@@ -19,14 +22,15 @@ namespace Autofac.log4net.log4net
                 return;
             }
 
+            var repository = LogManager.GetRepository(Assembly.GetCallingAssembly());
             var configFileInfo = new FileInfo(fileName);
             if (shouldWatch)
             {
-                XmlConfigurator.ConfigureAndWatch(configFileInfo);
+                XmlConfigurator.ConfigureAndWatch(repository, configFileInfo);
             }
             else
             {
-                XmlConfigurator.Configure(configFileInfo);
+                XmlConfigurator.Configure(repository, configFileInfo);
             }
         }
     }
