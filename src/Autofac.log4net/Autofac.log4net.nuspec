@@ -11,8 +11,18 @@
 		<description>This package allows Autofac to integrate with the log4net logging framework. The main feature of the package is its Log4NetModule for Autofac.</description>
 		<copyright>Copyright 2017</copyright>
 		<dependencies>
-			<dependency id="Autofac" version="3.0.0" />
-			<dependency id="log4net" version="2.0.3" />
-		</dependencies> 
+			<group targetFramework=".NETFramework4.0">
+				<dependency id="Autofac" version="3.0.0" />
+				<dependency id="log4net" version="2.0.3" />
+			</group>
+			<group targetFramework=".NETFramework4.5">
+				<dependency id="Autofac" version="3.0.0" />
+				<dependency id="log4net" version="2.0.3" />
+			</group>
+			<group targetFramework=".NETStandard2.0">
+				<dependency id="log4net" version="2.0.8" />
+				<dependency id="Autofac" version="4.0.0" />
+			</group>
+		</dependencies>
 	</metadata>
 </package>
