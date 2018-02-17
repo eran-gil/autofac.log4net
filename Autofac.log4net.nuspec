@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>Autofac.log4net</id>
-		<version>$version$</version>
+		<version>$version</version>
 		<title>Autofac.log4net</title>
 		<authors>Eran Gil</authors>
 		<owners>Eran Gil</owners>
@@ -20,9 +20,13 @@
 				<dependency id="log4net" version="2.0.3" />
 			</group>
 			<group targetFramework=".NETStandard2.0">
-				<dependency id="log4net" version="2.0.8" />
 				<dependency id="Autofac" version="4.0.0" />
+				<dependency id="log4net" version="2.0.6" />
 			</group>
 		</dependencies>
 	</metadata>
+	<files>
+		<file src="bin\Autofac.log4net.dll" target="lib\net40"/>
+		<file src="bin\Autofac.log4net.pdb" target="lib\net40"/>
+	</files>
 </package>
