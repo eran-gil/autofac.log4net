@@ -3,6 +3,7 @@ Autofac.log4net
 ## Description
 Autofac.log4net is a library that allows easy integration of log4net with the Autofac IoC container.
 It contains a Log4NetModule to support injection of ILog properties and constructor parameter to instances created through the Autofac container.
+The library now supports .net core (which is awesome!).
 
 ![VisualStudioBuild](https://erangil.visualstudio.com/_apis/public/build/definitions/03a1fe3b-e4f9-4387-a1e8-6f577710315e/5/badge) [![NuGet version](https://badge.fury.io/nu/autofac.log4net.svg)](https://badge.fury.io/nu/autofac.log4net)
 
