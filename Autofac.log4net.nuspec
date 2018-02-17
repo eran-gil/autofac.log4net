@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>Autofac.log4net</id>
-		<version>$version</version>
+		<version>$version$</version>
 		<title>Autofac.log4net</title>
 		<authors>Eran Gil</authors>
 		<owners>Eran Gil</owners>
