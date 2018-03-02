@@ -21,6 +21,9 @@ The library now supports .net core (which is awesome!).
     2. Mapping by namespaces - when injecting the logger, the most specific namespace mapping will be used.
 - The module allows configuring the application to a custom logger configuration file and watching it.
 
+## License:
+[MIT License](https://github.com/erangil2/autofac.log4net/blob/master/LICENSE)
+
 ## Examples
 
 #### Class with an ILog Constructor Parameter
