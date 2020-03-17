@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Autofac.Core;
+using Autofac.Core.Registration;
 using Autofac.log4net.log4net;
 using Autofac.log4net.Mapping;
 using log4net;
@@ -75,7 +76,7 @@ namespace Autofac.log4net
         }
 
         /// <inheritdoc />
-        protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)
+        protected override void AttachToComponentRegistration(IComponentRegistryBuilder componentRegistry, IComponentRegistration registration)
         {
             registration.Preparing += OnComponentPreparing;
 

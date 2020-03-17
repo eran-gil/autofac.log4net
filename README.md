@@ -11,7 +11,7 @@ The library now supports .net core (which is awesome!).
 - Supports .NET 4 and above.
 - The package has 2 package dependencies:
     - log4net >= 2.0.3
-    - Autofac >= 3.0.0
+    - Autofac >= 5.0.0
 ## Features
 - If a class has a property or constructor parameter of type ILog, it will inject it with a logger.
     - The logger instance will be by default the logger with the class type name.
