@@ -4,25 +4,29 @@
 		<id>Autofac.log4net</id>
 		<version>$version$</version>
 		<title>Autofac.log4net</title>
+		<license type="expression">MIT</license>
 		<authors>Eran Gil</authors>
 		<owners>Eran Gil</owners>
 		<projectUrl>https://github.com/erangil2/autofac.log4net</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>This package allows Autofac to integrate with the log4net logging framework. The main feature of the package is its Log4NetModule for Autofac.</description>
-		<copyright>Copyright 2017</copyright>
+		<copyright>Copyright 2020</copyright>
+		<tags>log logging autofac log4net di dependency injection</tags>
 		<dependencies>
 			<group targetFramework=".NETFramework4.6.1">
 				<dependency id="Autofac" version="5.0.0" />
-				<dependency id="log4net" version="2.0.3" />
+				<dependency id="log4net" version="2.0.8" />
 			</group>
 			<group targetFramework=".NETStandard2.0">
 				<dependency id="Autofac" version="5.0.0" />
-				<dependency id="log4net" version="2.0.6" />
+				<dependency id="log4net" version="2.0.8" />
 			</group>
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="bin\Autofac.log4net.dll" target="lib\net461"/>
-		<file src="bin\Autofac.log4net.pdb" target="lib\net461"/>
+		<file src="bin\net461\Autofac.log4net.dll" target="lib\net461"/>
+		<file src="bin\net461\Autofac.log4net.pdb" target="lib\net461"/>
+		<file src="bin\netstandard2.0\Autofac.log4net.dll" target="lib\netstandard2.0"/>
+		<file src="bin\netstandard2.0\Autofac.log4net.pdb" target="lib\netstandard2.0"/>
 	</files>
 </package>
