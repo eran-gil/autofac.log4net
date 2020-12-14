@@ -33,7 +33,7 @@ namespace Autofac.log4net
         /// <param name="configFileName">The filename for the log4net config file</param>
         /// <param name="shouldWatchConfiguration">Enables watching for configuration changes in the file</param>
         /// </summary>
-        public Log4NetMiddleware(string configFileName, bool shouldWatchConfiguration) :
+        public Log4NetMiddleware(string configFileName = null, bool shouldWatchConfiguration = true) :
             this(new Log4NetAdapter(), new CachedDictionaryLoggerMapper(), configFileName, shouldWatchConfiguration)
         {
         }

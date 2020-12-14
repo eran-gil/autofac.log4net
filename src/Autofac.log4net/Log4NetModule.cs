@@ -7,8 +7,7 @@ namespace Autofac.log4net
     public class Log4NetModule : Module
     {
         private readonly ILog4NetMiddleware _middleware;
-
-        public Log4NetModule(string configFileName, bool shouldWatchConfiguration)
+        public Log4NetModule(string configFileName = null, bool shouldWatchConfiguration = true)
         {
             _middleware = new Log4NetMiddleware(configFileName, shouldWatchConfiguration);
         }
