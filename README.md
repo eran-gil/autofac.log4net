@@ -52,12 +52,7 @@ builder.RegisterModule<Log4NetModule>();
 #### Custom Module Registration
 ```cs
 var builder = new ContainerBuilder();
-var loggingModule =
-    new Log4NetModule()
-    {
-        ConfigFileName = "logger.config",
-        ShouldWatchConfiguration = true
-    };
+var loggingModule = new Log4NetModule("logger.config", true);
 builder.RegisterModule(loggingModule);
 ```
 
