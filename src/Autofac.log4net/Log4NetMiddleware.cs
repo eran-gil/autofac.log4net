@@ -29,7 +29,7 @@ namespace Autofac.log4net
 
         /// <summary>
         /// Default Constructor for the Log4NetMiddleware.
-        /// Creates the module with the default implementations for its dependencies.
+        /// Creates the middleware with the default implementations for its dependencies.
         /// <param name="configFileName">The filename for the log4net config file</param>
         /// <param name="shouldWatchConfiguration">Enables watching for configuration changes in the file</param>
         /// </summary>
@@ -70,6 +70,27 @@ namespace Autofac.log4net
             }
         }
 
+        /// <summary>
+        /// Maps a type to a logger name, so when the ILog injection occurs, it will choose the correct logger.
+        /// </summary>
+        /// <param name="type">Type to be mapped</param>
+        /// <param name="loggerName">Logger name to be injected into the mapped type</param>
+        public void MapTypeToLoggerName(Type type, string loggerName)
+        {
+            _loggerMapper.MapTypeToLoggerName(type, loggerName);
+        }
+
+        /// <summary>
+        /// Maps a namespace to a logger name, so when the ILog injection occurs, it will choose the correct logger.
+        /// The module mapper will always return the most specific mapped-namespace's logger.
+        /// </summary>
+        /// <param name="namespace">Namespace to be mapped</param>
+        /// <param name="loggerName">Logger name to be injected into all types in the mapped namespace</param>
+        public void MapNamespaceToLoggerName(string @namespace, string loggerName)
+        {
+            _loggerMapper.MapNamespaceToLoggerName(@namespace, loggerName);
+        }
+
         private void ResolveContext(ResolveRequestContext context)
         {
             var newParameters = context.Parameters.Union(
@@ -93,27 +114,6 @@ namespace Autofac.log4net
             {
                 propToSet.SetValue(instance, logger, null);
             }
-        }
-
-        /// <summary>
-        /// Maps a type to a logger name, so when the ILog injection occurs, it will choose the correct logger.
-        /// </summary>
-        /// <param name="type">Type to be mapped</param>
-        /// <param name="loggerName">Logger name to be injected into the mapped type</param>
-        public void MapTypeToLoggerName(Type type, string loggerName)
-        {
-            _loggerMapper.MapTypeToLoggerName(type, loggerName);
-        }
-
-        /// <summary>
-        /// Maps a namespace to a logger name, so when the ILog injection occurs, it will choose the correct logger.
-        /// The module mapper will always return the most specific mapped-namespace's logger.
-        /// </summary>
-        /// <param name="namespace">Namespace to be mapped</param>
-        /// <param name="loggerName">Logger name to be injected into all types in the mapped namespace</param>
-        public void MapNamespaceToLoggerName(string @namespace, string loggerName)
-        {
-            _loggerMapper.MapNamespaceToLoggerName(@namespace, loggerName);
         }
 
         private ILog GetLoggerFromType(Type type)
