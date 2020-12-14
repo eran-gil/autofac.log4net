@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
-using log4net;
 using NUnit.Framework;
 
 namespace Autofac.log4net.Tests
@@ -22,13 +16,7 @@ namespace Autofac.log4net.Tests
             var builder = new ContainerBuilder();
             var fileName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase), configFileName);
             fileName = fileName.Replace("file:\\", "");
-            var loggingModule =
-                new Log4NetModule
-                {
-                    ConfigFileName = fileName,
-
-                    ShouldWatchConfiguration = false
-                };
+            var loggingModule = new Log4NetModule(fileName, false);
             builder.RegisterModule(loggingModule);
             builder.RegisterType<InjectableClass>();
             var container = builder.Build();
@@ -36,7 +24,7 @@ namespace Autofac.log4net.Tests
             //Act
             var resolved = container.Resolve<InjectableClass>();
 
-            //Assertu
+            //Assert
             resolved.InternalLogger.IsDebugEnabled.Should().BeFalse();
             resolved.InternalLogger.IsInfoEnabled.Should().Be(isInfoEnabled);
         }

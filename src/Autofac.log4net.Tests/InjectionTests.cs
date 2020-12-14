@@ -27,11 +27,10 @@ namespace Autofac.log4net.Tests
         {
             //Arrange
             var builder = new ContainerBuilder();
-            var loggingModule = new Log4NetModule(_log4NetAdapter, _loggerMapperAdapter);
+            var loggingModule = new Log4NetModule(new Log4NetMiddleware(_log4NetAdapter, _loggerMapperAdapter));
             var fakeLogger = Substitute.For<ILog>();
             fakeLogger.Logger.Name.Returns(loggerName);
             _log4NetAdapter.GetLogger(loggerName).Returns(fakeLogger);
-            builder.RegisterModule(loggingModule);
             builder.RegisterModule(loggingModule);
             builder.RegisterType<InjectableClass>();
             _loggerMapperAdapter.GetLoggerName(typeof(InjectableClass)).Returns(loggerName);
@@ -51,7 +50,7 @@ namespace Autofac.log4net.Tests
         {
             //Arrange
             var builder = new ContainerBuilder();
-            var loggingModule = new Log4NetModule(_log4NetAdapter, _loggerMapperAdapter);
+            var loggingModule = new Log4NetModule(new Log4NetMiddleware(_log4NetAdapter, _loggerMapperAdapter));
             var fakeLogger = Substitute.For<ILog>();
             fakeLogger.Logger.Name.Returns(loggerName);
             _log4NetAdapter.GetLogger(loggerName).Returns(fakeLogger);

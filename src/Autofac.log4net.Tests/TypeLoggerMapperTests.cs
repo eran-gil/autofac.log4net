@@ -157,7 +157,7 @@ namespace Autofac.log4net.Tests
             //Arrange
             var log4NetAdapter = Substitute.For<ILog4NetAdapter>();
             var typeLoggerMapperAdapter = Substitute.For<ILoggerMapper>();
-            var module = new Log4NetModule(log4NetAdapter, typeLoggerMapperAdapter);
+            var module = new Log4NetMiddleware(log4NetAdapter, typeLoggerMapperAdapter);
             var type = typeof(InjectableClass);
 
             //Act
@@ -175,7 +175,7 @@ namespace Autofac.log4net.Tests
             //Arrange
             var log4NetAdapter = Substitute.For<ILog4NetAdapter>();
             var typeLoggerMapperAdapter = Substitute.For<ILoggerMapper>();
-            var module = new Log4NetModule(log4NetAdapter, typeLoggerMapperAdapter);
+            var module = new Log4NetMiddleware(log4NetAdapter, typeLoggerMapperAdapter);
             var @namespace = typeof(InjectableClass).Namespace;
 
             //Act

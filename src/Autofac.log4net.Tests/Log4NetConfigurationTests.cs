@@ -23,7 +23,7 @@ namespace Autofac.log4net.Tests
         {
             //Arrange
             var builder = new ContainerBuilder();
-            var loggingModule = new Log4NetModule(_log4NetAdapter, _loggerMapperAdapter);
+            var loggingModule = new Log4NetModule(new Log4NetMiddleware(_log4NetAdapter, _loggerMapperAdapter));
             builder.RegisterModule(loggingModule);
 
             //Act
@@ -44,11 +44,7 @@ namespace Autofac.log4net.Tests
             //Arrange
             var builder = new ContainerBuilder();
             var loggingModule =
-                new Log4NetModule(_log4NetAdapter, _loggerMapperAdapter)
-                {
-                    ConfigFileName = configFileName,
-                    ShouldWatchConfiguration = shouldWatch
-                };
+                new Log4NetModule(new Log4NetMiddleware(_log4NetAdapter, _loggerMapperAdapter, configFileName, shouldWatch));
             builder.RegisterModule(loggingModule);
 
             //Act
