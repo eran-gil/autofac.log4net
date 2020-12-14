@@ -10,7 +10,7 @@ It contains a Log4NetModule to support injection of ILog properties and construc
 - Supports .NET 4.6.1 and above.
 - The package has 2 package dependencies:
     - log4net >= 2.0.8
-    - Autofac >= 5.0.0
+    - Autofac >= 6.0.0
 ## Features
 - If a class has a property or constructor parameter of type ILog, it will inject it with a logger.
     - The logger instance will be by default the logger with the class type name.

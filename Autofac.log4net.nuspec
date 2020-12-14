@@ -14,11 +14,11 @@
 		<tags>log logging autofac log4net di dependency injection</tags>
 		<dependencies>
 			<group targetFramework=".NETFramework4.6.1">
-				<dependency id="Autofac" version="5.0.0" />
+				<dependency id="Autofac" version="6.0.0" />
 				<dependency id="log4net" version="2.0.8" />
 			</group>
 			<group targetFramework=".NETStandard2.0">
-				<dependency id="Autofac" version="5.0.0" />
+				<dependency id="Autofac" version="6.0.0" />
 				<dependency id="log4net" version="2.0.8" />
 			</group>
 		</dependencies>
