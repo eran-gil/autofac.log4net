@@ -12,6 +12,14 @@ namespace Autofac.log4net
         /// <summary>
         /// Default Constructor for the Log4NetModule.
         /// Creates the module with the default implementations for its dependencies.
+        /// </summary>
+        public Log4NetModule() :
+            this(null, true)
+        {
+        }
+
+        /// <summary>
+        /// Creates the module with the default implementations for its dependencies.
         /// <param name="configFileName">The filename for the log4net config file</param>
         /// <param name="shouldWatchConfiguration">Enables watching for configuration changes in the file</param>
         /// </summary>
