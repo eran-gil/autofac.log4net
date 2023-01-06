@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Autofac.log4net.Caching;
@@ -14,13 +15,14 @@ namespace Autofac.log4net.Mapping
         private readonly IDictionary<Type, string> _typesToLoggers;
         private readonly IDictionary<string, string> _namespacesToLoggers;
         private readonly IKeyValueCache<Type, string> _typesToLoggersCache;
+        private readonly IComparer<string> _namespaceLengthComparer = new NamespaceLengthComparer();
 
         /// <summary>
         /// Default constructor for this class.
         /// Initiates the instance with empty dictionaries and default implementations for its dependencies.
         /// </summary>
         public CachedDictionaryLoggerMapper() :
-            this(new Dictionary<Type, string>(), new SortedDictionary<string, string>(), new DictionaryKeyValueCache<Type, string>())
+            this(new ConcurrentDictionary<Type, string>(), new ConcurrentDictionary<string, string>(), new DictionaryKeyValueCache<Type, string>())
         {
         }
 
@@ -46,7 +48,7 @@ namespace Autofac.log4net.Mapping
         {
             _typesToLoggers = typesToLoggers;
             _typesToLoggersCache = typesToLoggersCache;
-            _namespacesToLoggers = new SortedDictionary<string, string>(namespacesToLoggers, new NamespaceLengthComparer());
+            _namespacesToLoggers = namespacesToLoggers;
         }
 
         /// <inheritdoc />
@@ -77,7 +79,7 @@ namespace Autofac.log4net.Mapping
                 loggerName = _typesToLoggers[type];
             }
 
-            var matchingNamespaces = _namespacesToLoggers.Keys.Where(type.IsInNamespace).ToList();
+            var matchingNamespaces = _namespacesToLoggers.Keys.Where(type.IsInNamespace).OrderBy(i => i, _namespaceLengthComparer).ToList();
             if (matchingNamespaces.Any())
             {
                 var matchingNameSpace = matchingNamespaces.First();
