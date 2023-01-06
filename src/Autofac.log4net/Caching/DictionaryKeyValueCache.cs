@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace Autofac.log4net.Caching
@@ -18,7 +19,7 @@ namespace Autofac.log4net.Caching
         /// </summary>
         public DictionaryKeyValueCache()
         {
-            _cacheDictionary = new Dictionary<TKey, TValue>();
+            _cacheDictionary = new ConcurrentDictionary<TKey, TValue>();
         }
 
         /// <inheritdoc />
